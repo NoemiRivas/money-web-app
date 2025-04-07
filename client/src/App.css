@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+
+:root {
+    --background-form: #333232d3;
+    --secondary-color: #c2c2c2;
+    --third-color: #5e5e5e;
+    --bg-main: #F4F4F4;
+    --text-primary: #171717;
+
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAnimation 0.8s ease-in-out forwards;
+  }
+  
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+main {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: poppins, sans-serif;
+    padding-top: 3em;
+}
+
+/* Botones */
+.defaulbutton,
+.button-secondary,
+.buttons-categories,
+.save-button {
+    @apply bg-neutral-900 text-white cursor-pointer capitalize hover:bg-neutral-700;
+}
+
+.defaulbutton {
+    @apply w-full rounded-4xl p-3;
+}
+
+.button-secondary {
+    @apply text-sm rounded-2xl p-3;
+}
+
+.buttons-categories {
+    @apply w-[140px] rounded-4xl p-3;
+}
+
+.save-button {
+    @apply w-[180px] rounded-4xl p-3;
+}
+
+/* Diseño responsivo de formularios */
+@media (max-width: 768px), (max-width: 390px) {
+    .form-layout-2 .form-layout {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+/* Contenedor general */
+.container {
+    @apply max-w-[1300px] p-4 bg-white rounded-4xl;
+}
+
+/* Estilos de formularios */
+.form-layout,
+.form-layout-2 .form-layout {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-form);
+    margin: auto;
+    max-width: 100%;
+    height: 100vh;
+}
+
+/* Campos del formulario */
+.box-label {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    text-transform: capitalize;
+    margin-bottom: 1.2em;
+}
+
+/* Textos y etiquetas */
+h2 {
+    text-transform: capitalize;
+    font-size: 2.2em;
+    font-weight: 400;
+}
+
+label {
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-left: 0.6em;
+}
+
+/* Inputs */
+input {
+    font-size: medium;
+    padding: 0.6em 2em;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    color: var(--third-color);
+}
+
+input:focus {
+    outline-color: var(--secondary-color);
+}
