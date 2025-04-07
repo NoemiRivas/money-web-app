@@ -11,6 +11,7 @@ const expenseSchema = new mongoose.Schema({
     category: { type: String, required: true },
     done: { type: Boolean, default: false },
     userId:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
+    date: { type: Date, default: Date.now },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Expense', expenseSchema);

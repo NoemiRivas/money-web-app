@@ -17,6 +17,7 @@ const getAllTransactions = useCallback(async () => {
         type: transaction.type,
         amount: transaction.amount,
         category: transaction.category,
+        date: new Date(transaction.date).toLocaleDateString("es-ES")
       }));
       
       setTransactions(mappedTransactions);

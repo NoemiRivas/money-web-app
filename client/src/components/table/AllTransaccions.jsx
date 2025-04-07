@@ -10,10 +10,12 @@ export default function AllTransaccions() {
   const { transactions, loading, removeTransaction } = useContext(UserContext);
 
   const columns = useMemo(()=>[
-    { field: "date", headerName: "Fecha", width: 80 },
+    
+    { field: "date", headerName: "Fecha", width: 150 },
+    { field: "description", headerName: "Descripción", width: 300 },
     { field: "type", headerName: "Tipo", width: 200 },
     { field: "category", headerName: "Categoría", width: 400 },
-    { field: "amount", headerName: "Cantidad", width: 300 },
+    { field: " amount", headerName: "Cantidad", width: 300 },
     {
       field: "col5",
       headerName: "Accion",
