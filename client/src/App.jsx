@@ -14,6 +14,7 @@ import SettingsPage from "./pages/SettingsPage";
 //router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/privateRoutes/requireAuth";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+          <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registrarse" element={<RegisterPage />} />
           <Route element={<RequireAuth />}>

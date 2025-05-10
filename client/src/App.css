@@ -91,12 +91,12 @@ main {
     margin-bottom: 1.2em;
 }
 
-/* Textos y etiquetas */
+/* Textos y etiquetas 
 h2 {
     text-transform: capitalize;
-    font-size: 2.2em;
-    font-weight: 400;
-}
+    font-size: 4em;
+    font-weight: bold;
+}*/
 
 label {
     font-size: 1.2em;
