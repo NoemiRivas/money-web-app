@@ -56,7 +56,7 @@ export default function FormRegister() {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="w-[400px] p-4 rounded-3xl bg-white shadow-xl">
+      <div className=" w-[400px] p-4 py-10 rounded-3xl shadow-xl  bg-sky-600 shadow-stone-600  item flex flex-col gap-2">
         <div className="box-label">
           <label>Nombre </label>
           <input
@@ -83,13 +83,15 @@ export default function FormRegister() {
             value={input.password}
             onChange={changeEventHandler}
           />
+
+          
         </div>
         <ButtonForm />
         {error && (
           <p className="text-red-600 text-sm text-center my-2"> {error} </p>
         )}
         <span>
-          <p className="text-neutral-800 mt-2">
+          <p className="text-neutral-200 my-4 text-center">
             ¿Ya tienes una cuenta?
             <Link to={"/login"}>
               <span className="font-bold cursor-pointer"> Login</span>

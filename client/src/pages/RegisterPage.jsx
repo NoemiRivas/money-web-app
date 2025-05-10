@@ -1,34 +1,30 @@
 import React from "react";
 //components
 import FormRegister from "../components/forms/FormRegister";
-
+import Logo from "../components/mui/home/Logo";
+import BenefitCard from "../components/mui/BenefitCard";
 
 export default function RegisterPage() {
   return (
-    <main className="form-layout-2">
-      <section className="flex items-center gap-10 m-auto w-6xl bg-white p-14 rounded-4xl max-lg:flex-col max-lg:w-full max-sm:w-full max-sm:m-auto">
-        <div className="flex flex-col gap-3">
-          <span className="text-2xl font-medium text-neutral-600">
-            Bienvenid@ a MoneyTrack
-          </span>
-          <p className="font-medium text-3xl text-neutral-800  ">
-            Con MoneyTrack, podrás gestionar tus ingresos, gastos y ahorros en
-            un solo lugar. Regístrate hoy y comienza a:
+    <section className=" max-w-[1400px] m-auto ">
+      <Logo />
+      <div className="  flex items-center justify-between  py-18 max-lg:flex-col max-lg:w-full max-sm:w-full max-sm:m-auto">
+        <div className="flex flex-col gap-3 items-center text-center">
+          <h2 className="font-bold text-6xl text-sky-800  ">
+            Tu ahorro empieza hoy
+          </h2>
+          <p className="text-neutral-500 text-md w-2/3 mb-8">
+            💡Regístrate gratis y comienza a tomar el control de tus finanzas sin
+            hojas de cálculo, solo claridad y progreso.
           </p>
-          ✅ Organizar tus finanzas de forma clara y visual. ✅ Establecer metas
-          de ahorro y seguirlas paso a paso. ✅ Analizar tus hábitos de gasto
-          con reporte detallados ✅ Tomar decisiones inteligentes para mejorar
-          tu salud financiera.
+          <BenefitCard  />
         </div>
         <div>
-      
-          
-          <h3 className="text-4xl mb-4 font-medium text-neutral-600 text-center">
-            Registrarse
-          </h3>
+
+    
           <FormRegister />
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

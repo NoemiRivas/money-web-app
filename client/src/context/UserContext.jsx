@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState, useCallback } from "react";
 
-import { useTransactions } from "../components/hooks/useTransactions";
-import { useCategory } from "../components/hooks/useCategory";
-import { useUser } from "../components/hooks/useUser";
+import { useTransactions } from "../hooks/useTransactions";
+import { useCategory } from "../hooks/useCategory";
+import { useUser } from "../hooks/useUser";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
