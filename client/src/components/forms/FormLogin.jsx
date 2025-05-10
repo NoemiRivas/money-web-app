@@ -12,8 +12,7 @@ export default function FormLogin() {
   });
   const [error, setErrors] = useState(null);
 
-  const {updateUser}= useContext(UserContext)
-
+  const { updateUser } = useContext(UserContext);
 
   //API call
   const submitHandler = async (e) => {
@@ -28,15 +27,14 @@ export default function FormLogin() {
     }
 
     try {
-      const response = await loginUser(input)
+      const response = await loginUser(input);
       setErrors("");
       const { token, user } = response.data;
       if (token) {
         localStorage.setItem("token", token);
-        updateUser(user)
+        updateUser(user);
         navigate("/dashboard");
       }
-  
     } catch (error) {
       if (error.response && error.response.data.message) {
         setErrors(error.response.data.message);
@@ -52,9 +50,9 @@ export default function FormLogin() {
   return (
     <form
       onSubmit={submitHandler}
-      className="w-[400px] p-4  rounded-3xl bg-white shadow-xl"
+      className="w-[400px] p-6 rounded-3xl bg-cyan-600 shadow-stone-600 shadow-xl "
     >
-      <div className="box-label ">
+      <div className="box-label-login ">
         <label>email:</label>
         <input
           type="email"
@@ -63,19 +61,20 @@ export default function FormLogin() {
           onChange={changeEventHandler}
         />
       </div>
-      <div className="box-label  ">
+      <div className="box-label-login  ">
         <label>password:</label>
         <input
           type="password"
           name="password"
           value={input.password}
           onChange={changeEventHandler}
+          className="mb-8"
         />
+        <ButtonForm />
+        {error && (
+          <p className="text-red-600 text-sm text-center my-2"> {error} </p>
+        )}
       </div>
-      <ButtonForm />
-      {error && (
-        <p className="text-red-600 text-sm text-center my-2"> {error} </p>
-      )}
     </form>
   );
 }

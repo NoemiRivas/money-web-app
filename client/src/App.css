@@ -15,18 +15,19 @@
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInAnimation 0.8s ease-in-out forwards;
-  }
-  
-  @keyframes fadeInAnimation {
+}
+
+@keyframes fadeInAnimation {
     from {
-      opacity: 0;
-      transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(20px);
     }
+
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
 
 
 
@@ -55,7 +56,8 @@
 }
 
 /* Diseño responsivo de formularios */
-@media (max-width: 768px), (max-width: 390px) {
+@media (max-width: 768px),
+(max-width: 390px) {
     .form-layout-2 .form-layout {
         width: 100%;
         margin: auto;
@@ -68,26 +70,27 @@
 }
 
 /* Estilos de formularios */
-.form-layout,
-.form-layout-2 .form-layout {
-    display: flex;
-    align-items: center;
-    background-color: var(--color-red-50);
-    margin: auto;
-    max-width: 100%;
-   
-}
+
 
 /* Campos del formulario */
 .box-label {
-    
+
     color: var(--color-white);
     display: flex;
     flex-direction: column;
-   gap: 0.5em;
+    gap: 0.5em;
     text-transform: capitalize;
     margin-bottom: 1.2em;
-   
+
+}
+.box-label-login{
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    text-transform: capitalize;
+    margin-bottom: 1.2em;
+    margin-top: 1.2em;
 }
 
 /* Textos y etiquetas 

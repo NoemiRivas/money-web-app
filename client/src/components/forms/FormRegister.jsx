@@ -56,7 +56,7 @@ export default function FormRegister() {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className=" w-[400px] p-4 py-10 rounded-3xl shadow-xl  bg-sky-600 shadow-stone-600  item flex flex-col gap-2">
+      <div className=" w-[400px] p-4 py-10 rounded-3xl shadow-xl  bg-sky-600 shadow-stone-600  flex flex-col gap-2  mx-2 ">
         <div className="box-label">
           <label>Nombre </label>
           <input
@@ -83,8 +83,6 @@ export default function FormRegister() {
             value={input.password}
             onChange={changeEventHandler}
           />
-
-          
         </div>
         <ButtonForm />
         {error && (
