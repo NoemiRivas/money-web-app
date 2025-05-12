@@ -6,15 +6,13 @@ import React from "react";
 import ModalAddIncome from "./mui/ModalAddIncome";
 import UserSummaryBadget from "./auth/UserSummaryBadget";
 
-
-const containerStyle =
-  "max-w-[1100px] p-4 bg-white rounded-xl shadow-md flex justify-between items-center mx-auto my-4 gap-4 flex-col md:flex-row ";
-
 export default function TotalBalance() {
   return (
-    <section className={containerStyle}>
-      <UserSummaryBadget />
-      <ModalAddIncome />
-    </section>
+    <>
+      <section className="flex items-center justify-between">
+        <UserSummaryBadget />
+        <ModalAddIncome />
+      </section>
+    </>
   );
 }

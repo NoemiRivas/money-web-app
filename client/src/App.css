@@ -40,7 +40,7 @@
 }
 
 .defaulbutton {
-    @apply rounded-4xl p-3 bg-sky-300 text-white font-bold cursor-pointer capitalize hover:bg-sky-500;
+    @apply rounded-4xl p-3 bg-cyan-900 text-white font-bold cursor-pointer capitalize hover:bg-sky-500;
 }
 
 .button-secondary {

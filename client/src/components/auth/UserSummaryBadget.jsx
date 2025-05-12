@@ -20,35 +20,34 @@ export default function UserSummaryBadget() {
 
   const balance = totals.ingreso - totals.gasto;
 
-
   const financialData = [
-    { title: "Tus ingresos", amount: totals.ingreso, color: "text-green-600" },
-    { title: "Tus gastos", amount: totals.gasto, color: "text-red-600" },
+    { title: "ingresos", amount: totals.ingreso, color: "text-yellow-200 " },
+    { title: "gastos", amount: totals.gasto, color: "text-yellow-200 " },
     {
-      title: "Tu balance",
+      title: "Total",
       amount: balance,
-      color: balance >= 0 ? "text-green-600" : "text-red-600",
+      color: balance >= 0 ? "text-green-300 " : "text-red-300",
     },
   ];
 
   return (
     <div className="flex flex-col gap-2 items-start pt-4">
-      <div className="flex gap-4 font-normal text-4xl ">
+      <div className="flex gap-6 font-bold text-4xl text-sky-800 ">
         <p>Gusto en verte de nuevo por aqui</p>
-        <p className="font-semibold capitalize">{user.fullname}</p>
+        <p className="capitalize text-blue-400">{user.fullname}</p>
       </div>
-      <p className=" text-sm font-light text-neutral-400">
-        Puedes ver rapidamente tu situacion actual
+      <p className=" text-lg font-light text-neutral-400">
+        Aqui puedes ver rapidamente tu situacion actual
       </p>
-      <div className="flex gap-20  mt-10 max-lg:flex max-lg:gap-8 md:flex max-sm:flex-col">
+      <div className="flex gap-4  mt-4 max-lg:flex max-lg:gap-8 md:flex max-sm:flex-col ">
         {financialData.map((item, index) => (
           <div key={index} className="flex flex-col">
-            <div className="bg-neutral-100 border-2 border-neutral-300 rounded-md">
-              <h3 className="text-md text-neutral-700 font-normal mx-2 py-2 max-lg:text-sm">
+            <div className="bg-cyan-600 rounded-xl shadow-md shadow-sky-700 p-6 text-left hover:shadow-lg transition">
+              <h3 className="text-lg  text-white font-bold mx-2 py-2 max-lg:text-sm capitalize">
                 {item.title}
               </h3>
               <div
-                className={`bg-white w-[300px] p-4 rounded-xl md:w-[200px] sm:w-[180px] ${item.color}`}
+                className={`w-[300px] p-4 rounded-xl md:w-[200px] sm:w-[180px] ${item.color}`}
               >
                 <p className="text-3xl font-medium">
                   {item.amount.toLocaleString("es-ES", {

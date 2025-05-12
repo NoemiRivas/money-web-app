@@ -1,4 +1,4 @@
-
+import { MenuItem, Select, TextField } from "@mui/material";
 import { UserContext } from "../../context/UserContext";
 import { useContext, useState } from "react";
 
@@ -31,49 +31,56 @@ export default function AddTransaccion() {
     });
   };
   //---------------------------------------------------------------------------------
+  const style = {
+    styleInput: {
+      backgroundColor: "#fff",
+      borderRadius: 3,
+      outline:"none",
+      border: "none",
+       "& .MuiOutlinedInput-notchedOutline": {
+            border: "none",
+          }
+    },
+  };
+
   return (
-    <form onSubmit={handleAddIncome}>
-      <input
+    <form onSubmit={handleAddIncome} className="flex flex-col gap-2">
+      <Select
+        name="type"
+        value={formData.type}
+        onChange={handleChange}
+        sx={style.styleInput}
+      >
+        <MenuItem value="gasto">Gasto</MenuItem>
+        <MenuItem value="ingreso">Ingreso</MenuItem>
+      </Select>{" "}
+      <TextField sx={style.styleInput}
         type="text"
         placeholder="Nombre de la transaccion"
-        className="w-full p-2 my-2 border-2 border-gray-300 rounded-md"
         name="description"
         value={formData.description}
         onChange={handleChange}
       />
-      <select
-        className="w-full p-2 my-2 border-2 border-gray-300 rounded-md"
-        name="type"
-        value={formData.type}
-        onChange={handleChange}
-      >
-        <option value="gasto">Gasto</option>
-        <option value="ingreso">Ingreso</option>
-      </select>
-      <input
-        type="number"
+      <TextField sx={style.styleInput}
         placeholder="Cantidad"
-        className="w-full p-2 my-2 border-2 border-gray-300 rounded-md"
         name="amount"
         value={formData.amount}
         onChange={handleChange}
       />
-      <input
+      <TextField sx={style.styleInput}
         type="text"
         placeholder="Categoria"
-        className="w-full p-2 my-2 border-2 border-gray-300 rounded-md"
         name="category"
         value={formData.category}
         onChange={handleChange}
       />
-      <input
+      <TextField sx={style.styleInput}
         type="date"
-        className="w-full p-2 my-2 border-2 border-gray-300 rounded-md"
         name="date"
         value={formData.date}
         onChange={handleChange}
       />
-      <button type="submit" className="defaulbutton">
+      <button type="submit" className="defaulbutton my-4">
         Agregar
       </button>
     </form>
