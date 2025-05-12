@@ -1,58 +1,79 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { DataGrid } from "@mui/x-data-grid";
-//THIS IS A COMPONENT THAT SHOWS THE HISTORY OF TRANSACTIONS AT DASHBOARPAGE
+import { Button, Paper } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function TransaccionHistory() {
   //context
   const { transactions, loading } = useContext(UserContext);
-  console.log("Transacciones:", transactions);
+
   //---------------------columns--------------------------------
 
   const columns = [
-   
-    
-    { field: "description", headerName: "Descripción", width: 150 },
-  { field: "type", headerName: "Tipo", width: 150 },
-  { field: "category", headerName: "Categoría", width: 150 },
-  { field: "amount", headerName: "Cantidad", width: 150 },
+    {
+      field: "description",
+      headerName: "Descripción",
+      width: 287,
+      backgroundColor: "#0092b8",
+    },
+    { field: "type", headerName: "Tipo", width: 287 },
+    { field: "category", headerName: "Categoría", width: 287 },
+    { field: "amount", headerName: "Cantidad", width: 287 },
   ];
 
   if (loading) {
     return <p>Cargando transacciones...</p>;
   }
 
+  const stayle = {
+    button: {
+      borderRadius: "8px",
+      "&:hover": {
+        backgroundColor: "#0077a3",
+        color: "#fff",
+      },
+    },
+  };
+
   return (
-    <section className="max-w-[1100px] p-4 bg-white rounded-xl shadow-md mx-auto my-4 fade-in opacity-0 animate-fadeIn delay-200 ">
-      <div className="mb-4">
-        <h2>Historial </h2>
-        <p className="text-sm font-light text-neutral-400">
-          Aqui puedes ver todo el historial de tus transacciones.
-        </p>
+    <>
+      <div className=" py-8 ">
+        <h2 className="text-4xl font-bold text-sky-800">
+          Transacciones agregadas ultimamente...{" "}
+        </h2>
+      </div>
+      <div className="py-2">
+        <Link to={"/transacciones"}>
+          <Button sx={stayle.button}>ver todas</Button>
+        </Link>
       </div>
 
-      <div
-        style={{
-          height: 300,
-          maxWidth: "100%",
-          margin: "auto",
-          marginTop: "4em",
-          "@media (max-width: 1400px)": {
-            maxWidth: "80%",
-            marginTop: "2em",
-          },
-        }}
-      >
-        {transactions.length > 0 ? (
-          <div className="h-[300px] w-full mt-6">
-            <DataGrid rows={transactions} columns={columns}  />
-          </div>
-        ) : (
-          <p className="text-center text-neutral-500">
-            Aun no has agragado una nueva transaccion
-          </p>
-        )}
-      </div>
-    </section>
+      {transactions.length > 0 ? (
+        <Paper
+          sx={{
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            disableColumnResize
+            rows={transactions}
+            columns={columns}
+            pageSize={5}
+            pageSizeOptions={4}
+            sx={{
+              backgroundColor: "#f0f4f8",
+              borderRadius: "8px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              
+            }}
+          />
+        </Paper>
+      ) : (
+        <p className="text-center text-neutral-500">
+          Aun no has agragado una nueva transaccion
+        </p>
+      )}
+    </>
   );
 }
