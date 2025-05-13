@@ -50,10 +50,7 @@ export default function UserSummaryBadget() {
                 className={`w-[300px] p-4 rounded-xl md:w-[200px] sm:w-[180px] ${item.color}`}
               >
                 <p className="text-3xl font-medium">
-                  {item.amount.toLocaleString("es-ES", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
+                  {item.amount}
                 </p>
               </div>
             </div>

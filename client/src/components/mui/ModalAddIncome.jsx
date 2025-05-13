@@ -5,8 +5,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import AddTransaccion from "../forms/AddTransaccion";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 
 const style = {
   position: "absolute",
@@ -26,25 +24,10 @@ const style = {
   
 };
 
-export default function ModalAddIncome() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function ModalAddIncome({ open, handleClose}) {
 
   return (
     <>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        color="primary"
-        size="large"
-        className="flex items-center justify-center"
-        sx={style.button}
-      >
-        <AddIcon />
-        <Typography sx={{ ml: 2, fontSize: 14 }}>nueva Transacción</Typography>
-      </Button>
-
       <Modal
         open={open}
         onClose={handleClose}

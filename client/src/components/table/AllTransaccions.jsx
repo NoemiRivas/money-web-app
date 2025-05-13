@@ -3,19 +3,20 @@ import { UserContext } from "../../context/UserContext";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TableModalAdd from "../mui/TableModalAdd";
 import ModalUpdateTransaction from "../mui/ModalUpdateTransaction";
+import { Link } from "react-router-dom";
+import { Button, Container, Paper } from "@mui/material";
+import ModalWrapper from "../mui/ModalWrapper";
 
 export default function AllTransaccions() {
   const { transactions, loading, removeTransaction } = useContext(UserContext);
 
-  const columns = useMemo(()=>[
-    
+  const columns = useMemo(() => [
     { field: "date", headerName: "Fecha", width: 150 },
     { field: "description", headerName: "Descripción", width: 300 },
-    { field: "type", headerName: "Tipo", width: 200 },
-    { field: "category", headerName: "Categoría", width: 400 },
-    { field: " amount", headerName: "Cantidad", width: 300 },
+    { field: "type", headerName: "Tipo", width: 150 },
+    { field: "category", headerName: "Categoría", width: 150 },
+    { field: "amount", headerName: "Cantidad", width: 150 },
     {
       field: "col5",
       headerName: "Accion",
@@ -36,7 +37,9 @@ export default function AllTransaccions() {
       width: 80,
       renderCell: (params) => (
         <div className="cursor-pointer">
-          <ModalUpdateTransaction id={params.row.id} />
+          <Link to={`/update/${params.row.id}`}>
+            <Button>Modificar</Button>
+          </Link>
         </div>
       ),
     },
@@ -45,19 +48,24 @@ export default function AllTransaccions() {
     return <p>Cargando transacciones...</p>;
   }
   return (
-    <section className="my-4 m-auto w-11/12 fade-in ">
+    <Container className="fade-in ">
       <div className="mb-6 flex justify-between items-center  max-sm:flex-col max-sm:items-start max-sm:gap-5">
-        <div>
-          <h2>Transacciones</h2>
-          <p className="text-sm font-light text-neutral-400">
-            Aqui puedes ver el riepilogo de todas tus transacciones.
-          </p>
+        <div className=" py-8 ">
+          <h2 className="text-4xl font-bold text-sky-800">
+            Todas las trasacciones
+          </h2>
         </div>
-        <TableModalAdd />
+        <ModalWrapper />
       </div>
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid rows={transactions} columns={columns} disableColumnResize />
-      </div>
-    </section>
+      <Paper sx={{ width: "full" }}>
+        <DataGrid
+          rows={transactions}
+          columns={columns}
+          disableColumnResize
+          pageSize={5}
+          pageSizeOptions={4}
+        />
+      </Paper>
+    </Container>
   );
 }

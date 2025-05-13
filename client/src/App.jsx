@@ -15,6 +15,8 @@ import SettingsPage from "./pages/SettingsPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/privateRoutes/requireAuth";
 import HomePage from "./pages/HomePage";
+import ModalWrapper from "./components/mui/ModalWrapper";
+import AddTransaccion from "./components/forms/AddTransaccion";
 
 function App() {
   return (
@@ -22,10 +24,11 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage/>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registrarse" element={<RegisterPage />} />
           <Route element={<RequireAuth />}>
+            <Route path="/update/:id" element={<AddTransaccion />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/transacciones" element={<TransaccionsPage />} />
             <Route path="/categorias" element={<CategoryPages />} />

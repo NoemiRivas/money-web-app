@@ -19,7 +19,11 @@ export default function TransaccionHistory() {
     },
     { field: "type", headerName: "Tipo", width: 287 },
     { field: "category", headerName: "Categoría", width: 287 },
-    { field: "amount", headerName: "Cantidad", width: 287 },
+    {
+      field: "amount",
+      headerName: "Cantidad",
+      width: 287,
+    },
   ];
 
   if (loading) {
@@ -53,6 +57,10 @@ export default function TransaccionHistory() {
         <Paper
           sx={{
             width: "100%",
+
+            "& .font-tabular-nums": {
+              fontVariantNumeric: "tabular-nums",
+            },
           }}
         >
           <DataGrid
@@ -65,7 +73,7 @@ export default function TransaccionHistory() {
               backgroundColor: "#f0f4f8",
               borderRadius: "8px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-              
+              "--DataGrid-overlayHeight": "300px",
             }}
           />
         </Paper>
