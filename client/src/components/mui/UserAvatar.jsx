@@ -6,12 +6,12 @@ import { Stack } from "@mui/material/";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { UserContext } from "../../context/userContext";
+
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/UserContext";
 
 export default function UserAvatar() {
-  //context
-  const {clearUser, user}= useContext(UserContext)
+  const {signOut, user} = useAuth()
   const navigate = useNavigate();
   //open and close the menu ---- MUI
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,8 +24,7 @@ export default function UserAvatar() {
   };
   //logout
   const handleLogout = () => {
-    clearUser();
-    localStorage.removeItem("token");
+    signOut()
     navigate("/login");
   }
 

@@ -20,8 +20,8 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(express.json());
-app.use("/api/", User)
-app.use("/api/", Expense)
+app.use("/api/user", User)
+app.use("/api/expense", Expense)
 app.use("/api/", Category)
 
 app.listen(PORT, () => {

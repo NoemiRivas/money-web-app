@@ -1,79 +1,58 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+//components
 import ButtonForm from "../buttons/ButtonForm";
-import { UserContext } from "../../context/UserContext";
-import { loginUser } from "../../services/userService";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/UserContext";
 
 export default function FormLogin() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { signIn, isAuthenticated, error: registerError } = useAuth();
+
   const navigate = useNavigate();
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated]);
+
+  const onSubmit = handleSubmit(async (values) => {
+    signIn(values);
   });
-  const [error, setErrors] = useState(null);
 
-  const { updateUser } = useContext(UserContext);
-
-  //API call
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (!input.email) {
-      setErrors("Porfavor introduce una email valida o existente");
-      return;
-    }
-    if (!input.password) {
-      setErrors("Porfavor introduce una password valida");
-      return;
-    }
-
-    try {
-      const response = await loginUser(input);
-      setErrors("");
-      const { token, user } = response.data;
-      if (token) {
-        localStorage.setItem("token", token);
-        updateUser(user);
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        setErrors(error.response.data.message);
-      } else {
-        setErrors("Algo ha salido mal. Porfavor intenata de nuevo");
-      }
-    }
-  };
-
-  const changeEventHandler = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
   return (
-    <form
-      onSubmit={submitHandler}
-      className="w-[400px] p-6 rounded-3xl bg-cyan-600 shadow-stone-600 shadow-xl "
-    >
+    <form onSubmit={onSubmit} className="w-[400px] p-6 rounded-3xl bg-cyan-600 shadow-stone-600 shadow-xl ">
+  
+      
       <div className="box-label-login ">
         <label>email:</label>
         <input
           type="email"
           name="email"
-          value={input.email}
-          onChange={changeEventHandler}
+             {...register("email", { required: true })}
         />
+             {errors.email && (
+                <p className="text-red-700">la password es requerida</p>
+              )}
       </div>
       <div className="box-label-login  ">
         <label>password:</label>
         <input
           type="password"
           name="password"
-          value={input.password}
-          onChange={changeEventHandler}
+          {...register("password", { required: true })}
           className="mb-8"
         />
         <ButtonForm />
-        {error && (
-          <p className="text-red-600 text-sm text-center my-2"> {error} </p>
-        )}
+            {errors.password && (
+                <p className="text-red-700">la password es requerida</p>
+              )}
       </div>
     </form>
   );

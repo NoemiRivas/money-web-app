@@ -1,85 +1,85 @@
 import { MenuItem, Select, TextField } from "@mui/material";
-import { UserContext } from "../../context/UserContext";
-import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTransaction } from "../../context/TransactionContext";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function AddTransaccion() {
-  const [formData, setFormData] = useState({
-    description: "",
-    amount: 0,
-    category: "",
-    date: "",
-    type: "gasto",
-  });
-  //context
-  const { addTransaction } = useContext(UserContext);
-  //cambiar el estado de los inputs
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  //-------------refactorizado------------
-  //api call
-  const handleAddIncome = async (e) => {
-    e.preventDefault();
-    addTransaction(formData);
-    setFormData({
+  const { oneTransaction, createTransactions } = useTransaction();
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: {
+      type: "", // Valor inicial para el campo "type"
       description: "",
-      amount: 0,
+      amount: "",
       category: "",
-      date: "",
-      type: "gasto",
-    });
-  };
+    },
+  });
+  const params = useParams();
+
+  useEffect(() => {
+    async function loadTransactions() {
+      if (params.id) {
+        const transaccion = await oneTransaction(params.id);
+        setValue("type", transaccion.type);
+        setValue("amount", transaccion.amount);
+        setValue("category", transaccion.category);
+        setValue("description", transaccion.description);
+      }
+    }
+    loadTransactions();
+  }, []);
+
+  const onSubmit = handleSubmit((data) => {
+    try {
+      createTransactions(data);
+    } catch (error) {
+      console.log("error al crear la transaction", error);
+    }
+  });
+
   //---------------------------------------------------------------------------------
   const style = {
     styleInput: {
       backgroundColor: "#fff",
       borderRadius: 3,
-      outline:"none",
+      outline: "none",
       border: "none",
-       "& .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-          }
+      "& .MuiOutlinedInput-notchedOutline": {
+        border: "none",
+      },
     },
   };
-
+  const type = watch("type");
   return (
-    <form onSubmit={handleAddIncome} className="flex flex-col gap-2">
+    <form onSubmit={onSubmit} className="flex flex-col gap-2">
       <Select
-        name="type"
-        value={formData.type}
-        onChange={handleChange}
+        {...register("type", { required: true })}
+        value={type}
+        onChange={(e) => setValue("type", e.target.value)} // Actualiza el valor en react-hook-form
         sx={style.styleInput}
       >
         <MenuItem value="gasto">Gasto</MenuItem>
         <MenuItem value="ingreso">Ingreso</MenuItem>
-      </Select>{" "}
-      <TextField sx={style.styleInput}
+      </Select>
+      <TextField
+        sx={style.styleInput}
         type="text"
         placeholder="Nombre de la transaccion"
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
+        {...register("description", { required: true })}
       />
-      <TextField sx={style.styleInput}
+      <TextField
+        sx={style.styleInput}
         placeholder="Cantidad"
-        name="amount"
-        value={formData.amount}
-        onChange={handleChange}
+       type= "number"
+        {...register("amount", { required: true })}
       />
-      <TextField sx={style.styleInput}
+      <TextField
+        sx={style.styleInput}
         type="text"
         placeholder="Categoria"
-        name="category"
-        value={formData.category}
-        onChange={handleChange}
+        {...register("category", { required: true })}
       />
-      <TextField sx={style.styleInput}
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-      />
+
       <button type="submit" className="defaulbutton my-4">
         Agregar
       </button>

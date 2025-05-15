@@ -4,11 +4,12 @@ import Sidebar from "./mui/Sidebar";
 import UserAvatar from "./mui/UserAvatar";
 //icons
 import SearchIcon from "@mui/icons-material/Search";
-import { UserContext } from "../context/UserContext";
+import { useAuth } from "../context/UserContext";
+
 
 export default function NavBar() {
-  
-  const { user } = useContext(UserContext);
+ const {user}= useAuth()
+
 
   if (!user) {
     return null;

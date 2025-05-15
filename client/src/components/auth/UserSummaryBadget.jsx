@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { useTransaction } from "../../context/TransactionContext";
+import { useAuth } from "../../context/UserContext";
 
-// This component displays a summary of the user's financial data, including income, expenses, and balance.
 
 export default function UserSummaryBadget() {
-  const { transactions, user } = useContext(UserContext);
+const {transactions} = useTransaction()
+const {user}= useAuth()
 
   const totals = transactions.reduce(
     (data, transaction) => {
-      if (transaction.type === "ingreso") {
+      if (transaction?.type === "ingreso") {
         data.ingreso += transaction.amount;
-      } else if (transaction.type === "gasto") {
+      } else if (transaction?.type === "gasto") {
         data.gasto += transaction.amount;
       }
       return data;
@@ -49,9 +50,7 @@ export default function UserSummaryBadget() {
               <div
                 className={`w-[300px] p-4 rounded-xl md:w-[200px] sm:w-[180px] ${item.color}`}
               >
-                <p className="text-3xl font-medium">
-                  {item.amount}
-                </p>
+                <p className="text-3xl font-medium">{item.amount}</p>
               </div>
             </div>
           </div>

@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import React from 'react'
+import { useAuth } from '../../context/UserContext'
+import { Navigate, Outlet } from 'react-router-dom'
 
-export default function RequireAuth() {
-  const { user, clearTransactions } = useContext(UserContext);
-  useEffect(() => {
-    if (!user) {
-      clearTransactions(); 
-    }
-  }, [user, clearTransactions]);
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
 
-  return <Outlet/>;
+
+export default function ProtectedRoute() {
+    const {user, isAuthenticated, loading} = useAuth()
+    if (loading) return <div>Loading...</div>
+    if (!loading && !isAuthenticated) return <Navigate to="/login" replace /> 
+
+  return (
+    <Outlet />
+  )
 }

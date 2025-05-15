@@ -1,34 +1,19 @@
 const Expense = require("../models/expenseModel");
 
-
 exports.addExpense = async (req, res) => {
   try {
     const { description, amount, category, type } = req.body;
-    if (!req.user) {
-      return res.status(401).json({
-        message: "Usuario no autenticado.",
-        success: false,
-      });
-    }
-    if (!description || !amount || !category) {
-      return res.status(400).json({
-        message: "Something is missing!",
-        success: false,
-      });
-    }
-    const expense = await Expense.create({
+
+    const newExpense = new Expense({
       description,
       amount: Number(amount),
       category,
       type,
-      userId: req.user._id,
+      userId: req.user.id,
     });
 
-    return res.status(201).json({
-      message: "New Expense Added.",
-      expense,
-      success: true,
-    });
+    const savedExpense = await newExpense.save();
+    res.json(savedExpense);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -40,21 +25,25 @@ exports.addExpense = async (req, res) => {
 
 exports.getAllExpenses = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const expense = await Expense.find({
+      userId: req.user.id,
+    }).populate("userId", "name email");
 
-    const expenses = await Expense.find({ userId });
+    if (!expense)
+      return res.status(404).json({ message: "transaccion no encontrada" });
+    res.json(expense);
+    console.log("Transacciones obtenidas del backend:", expense);
+  } catch (error) {
+    console.log("error al obtener todas las entradas", error);
+  }
+};
 
-    if (!expenses) {
-      return res.status(404).json({
-        message: "No expenses found.",
-        success: false,
-      });
-    }
-
-    return res.status(200).json({
-      expenses,
-      success: true,
-    });
+exports.getExpenseById = async (req, res) => {
+  try {
+    const expense = await Expense.findById(req.params.id).populate("user");
+    if (!expense)
+      return res.status(404).json({ message: "transaccion no encontrada" });
+    res.json(expense);
   } catch (error) {
     console.log("error al obtener todas las entradas", error);
   }
@@ -62,31 +51,24 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.removeExpense = async (req, res) => {
   try {
-    const expenseId = req.params.id;
-    await Expense.findByIdAndDelete(expenseId);
-    return res.status(200).json({
-      message: "Expense removed.",
-      success: true,
-    });
+    const expense = await Expense.findByIdAndDelete({ _id: req.params.id });
+    if (!expense)
+      return res.status(404).json({ message: "transaccion no encontrada" });
+    res.json(expense);
   } catch (error) {
     console.log(error);
   }
 };
 exports.updateExpense = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updateData = req.body;
-
-    const expense = await Expense.findByIdAndUpdate(
-      { _id: id, userId: req.user._id },
-      updateData,
+    const expense = await Expense.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
       { new: true }
     );
-    return res.status(200).json({
-      message: "Expense Updated.",
-      expense,
-      success: true,
-    });
+    if (!expense)
+      return res.status(404).json({ message: "transaccion no encontrada" });
+    res.json(expense);
   } catch (error) {
     console.log(error);
   }

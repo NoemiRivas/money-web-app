@@ -1,12 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTransaction } from "../../context/TransactionContext";
 
 export default function TransaccionHistory() {
   //context
-  const { transactions, loading } = useContext(UserContext);
+  const { transactions, getTransactions } = useTransaction();
+  useEffect(()=>{
+    getTransactions()
+  },[])
 
   //---------------------columns--------------------------------
 
@@ -25,10 +29,7 @@ export default function TransaccionHistory() {
       width: 287,
     },
   ];
-
-  if (loading) {
-    return <p>Cargando transacciones...</p>;
-  }
+ ;
 
   const stayle = {
     button: {
@@ -65,10 +66,11 @@ export default function TransaccionHistory() {
         >
           <DataGrid
             disableColumnResize
-            rows={transactions}
+              getRowId={(row) => row._id}
+              rows={transactions}
             columns={columns}
             pageSize={5}
-            pageSizeOptions={4}
+            pageSizeOptions={[4]}
             sx={{
               backgroundColor: "#f0f4f8",
               borderRadius: "8px",

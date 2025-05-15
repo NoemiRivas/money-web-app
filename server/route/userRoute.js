@@ -1,10 +1,14 @@
 const router = require("express").Router();
-const {register, login, logout,updateUser} = require("../controller/userController")
+const {register, login, updateUser, logout, profile, verifyRequest} = require("../controller/userController")
 const middleware = require("../middleware/isAuthenticate")
+const validateSchema = require("../middleware/validetor.middleware")
+const {registerSchema, loginSchema}= require("../schemas/userSchema")
 
-router.post("/register", register)
-router.post("/login", login)
-router.put("/update",middleware, updateUser)
-router.post("/logout",logout)
+router.post("/register",validateSchema(registerSchema), register);
+router.post("/login", validateSchema(loginSchema), login);
+router.get("/update/:id", updateUser);
+router.post("/logout", logout);
+router.get("/profile", middleware, profile);
+router.get("/verify", verifyRequest);
 
 module.exports = router

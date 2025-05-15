@@ -1,17 +1,21 @@
-import React, { useContext, useMemo } from "react";
-import { UserContext } from "../../context/UserContext";
+import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ModalUpdateTransaction from "../mui/ModalUpdateTransaction";
 import { Link } from "react-router-dom";
 import { Button, Container, Paper } from "@mui/material";
 import ModalWrapper from "../mui/ModalWrapper";
+import { useTransaction } from "../../context/TransactionContext";
 
 export default function AllTransaccions() {
-  const { transactions, loading, removeTransaction } = useContext(UserContext);
+  const { getTransactions, transactions, deleteTransactions } =
+    useTransaction();
 
-  const columns = useMemo(() => [
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
+  const columns = [
     { field: "date", headerName: "Fecha", width: 150 },
     { field: "description", headerName: "Descripción", width: 300 },
     { field: "type", headerName: "Tipo", width: 150 },
@@ -19,13 +23,13 @@ export default function AllTransaccions() {
     { field: "amount", headerName: "Cantidad", width: 150 },
     {
       field: "col5",
-      headerName: "Accion",
-      width: 150,
+      headerName: "Eliminar",
+      width: 124,
       renderCell: (params) => (
         <IconButton
           variant="contained"
           color="##171717"
-          onClick={() => removeTransaction(params.row.id)}
+          onClick={() => deleteTransactions(params.row._id)}
         >
           <DeleteIcon />
         </IconButton>
@@ -34,19 +38,17 @@ export default function AllTransaccions() {
     {
       field: "col6",
       headerName: "Modficar",
-      width: 80,
+      width: 120,
       renderCell: (params) => (
         <div className="cursor-pointer">
-          <Link to={`/update/${params.row.id}`}>
+          <Link to={`/update/${params.row._id}`}>
             <Button>Modificar</Button>
           </Link>
         </div>
       ),
     },
-  ]);
-  if (loading) {
-    return <p>Cargando transacciones...</p>;
-  }
+  ];
+
   return (
     <Container className="fade-in ">
       <div className="mb-6 flex justify-between items-center  max-sm:flex-col max-sm:items-start max-sm:gap-5">
@@ -60,6 +62,7 @@ export default function AllTransaccions() {
       <Paper sx={{ width: "full" }}>
         <DataGrid
           rows={transactions}
+          getRowId={(row) => row._id}
           columns={columns}
           disableColumnResize
           pageSize={5}
