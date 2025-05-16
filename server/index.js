@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/user", User);
 app.use("/api/expense", Expense);
-app.use("/api/", Category);
+app.use("/api/categories", Category);
 
 app.listen(PORT, () => {
   console.log(`Server listen at port ${PORT}`);

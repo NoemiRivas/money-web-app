@@ -1,46 +1,29 @@
-import React, { useContext, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import { useCategories } from "../../context/CategoriesContext";
 
-
-import { useEffect } from "react";
-import EditCategory from "../buttons/EditCategory";
-import DeleteButton from "../buttons/DeleteButton";
-
-export default function CategoryCard({ userId }) {
-
+export default function CategorySelector({ onSelect }) {
+  const { categories, getCategories } = useCategories();
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
-    getCategories(userId);
-  }, [userId, getCategories]);
+    getCategories();
+  }, []);
 
-  const memoizedCategories = useMemo(() => categories, [categories]);
+  const handleChange = (e) => {
+    setSelected(e.target.value);
+    onSelect(e.target.value);
+  };
 
-  if (loading) {
-    return <p>Cargando categorías...</p>;
-  }
   return (
     <>
-      {memoizedCategories.map((category) => (
-        <div
-          key={category._id}
-          className="bg-white shadow-md rounded-lg w-auto p-4"
-        >
-          <div className="flex justify-between items-center ">
-            <div className="flex flex-col">
-              <h3 className="text-base font-semibold capitalize">
-                {category.name}
-              </h3>
-              <p className="text-sm text-neutral-400">
-                {category.type}
-              </p>
-            </div>
-
-            <div className="flex gap-2 sm:gap-4">
-              <EditCategory category={category}  />
-              <DeleteButton categoryId={category._id} />
-            </div>
-          </div>
-        </div>
+      <h1>categorias creadas</h1>{ categories.map((item, key)=> (<div key={key}>
+        <h2>{item.name} </h2>
+        <ul>
+          <li>{item.type} </li>
+        </ul>
+      </div>
       ))}
+     
     </>
   );
 }

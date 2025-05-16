@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddTransaccion from "./components/forms/AddTransaccion";
 import TransactionProvider from "./context/TransactionContext";
+import CategoriesProvider from "./context/CategoriesContext";
 import {
   SignIn,
   SignUp,
@@ -20,63 +21,65 @@ import {
 function App() {
   return (
     <TransactionProvider>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/login"
-            element={<SignIn routing="path" path="/login" />}
-          />
-          <Route
-            path="/registrarse"
-            element={<SignUp routing="path" path="/registrarse" />}
-          />
+      <CategoriesProvider>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/login"
+              element={<SignIn routing="path" path="/login" />}
+            />
+            <Route
+              path="/registrarse"
+              element={<SignUp routing="path" path="/registrarse" />}
+            />
 
-          <Route
-            path="/update/:id"
-            element={
-              <SignedIn>
-                <AddTransaccion />
-              </SignedIn>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <SignedIn>
-                <DashboardPage />
-              </SignedIn>
-            }
-          />
-          <Route
-            path="/transacciones"
-            element={
-              <SignedIn>
-                <TransaccionsPage />
-              </SignedIn>
-            }
-          />
-          <Route
-            path="/categorias"
-            element={
-              <SignedIn>
-                <CategoryPages />
-              </SignedIn>
-            }
-          />
-          <Route path="/perfil" element={<SettingsPage />} />
+            <Route
+              path="/update/:id"
+              element={
+                <SignedIn>
+                  <AddTransaccion />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <SignedIn>
+                  <DashboardPage />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/transacciones"
+              element={
+                <SignedIn>
+                  <TransaccionsPage />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/categorias"
+              element={
+                <SignedIn>
+                  <CategoryPages />
+                </SignedIn>
+              }
+            />
+            <Route path="/perfil" element={<SettingsPage />} />
 
-          <Route
-            path="/login"
-            element={
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/login"
+              element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </CategoriesProvider>
     </TransactionProvider>
   );
 }

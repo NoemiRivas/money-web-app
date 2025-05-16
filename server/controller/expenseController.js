@@ -29,7 +29,7 @@ exports.getAllExpenses = async (req, res) => {
     const userId = req.auth.userId;
     const expense = await Expense.find({
       user: userId,
-    });
+    }).populate("category");
 
     if (!expense)
       return res.status(404).json({ message: "transaccion no encontrada" });

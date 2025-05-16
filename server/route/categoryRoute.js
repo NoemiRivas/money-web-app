@@ -1,11 +1,10 @@
 const router = require("express").Router();
 const {createCategory, deleteCategory, updateCategory, getCategories} = require("../controller/categoryController")
-const middleware = require("../middleware/isAuthenticate")
-
-router.post("/add-category",middleware, createCategory)
-router.get("/get-categories/:id",middleware, getCategories)
-router.put("/update-category/:id",middleware, updateCategory)
-router.delete("/delete/:id",middleware, deleteCategory)
+const clerAuth = require("../middleware/clearkAuth")
+router.post("/add-categories",clerAuth, createCategory)
+router.get("/get-categories",clerAuth, getCategories)
+router.put("/update-category/:id",clerAuth, updateCategory)
+router.delete("/delete/:id",clerAuth, deleteCategory)
 
 
 

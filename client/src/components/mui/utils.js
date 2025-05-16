@@ -56,7 +56,7 @@ const listMenuItems = [
   {
     id: 7,
     name: "configuración",
-    link: "/configuracion",
+    link: "/perfil",
     icon: SettingsIcon,
     classes: "relative top-60",
   },

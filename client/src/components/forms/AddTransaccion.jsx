@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { useTransaction } from "../../context/TransactionContext";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useCategories } from "../../context/CategoriesContext";
 
 export default function AddTransaccion() {
+   const { categories, getCategories } = useCategories();
   const { oneTransaction, createTransactions } = useTransaction();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
@@ -73,12 +75,18 @@ export default function AddTransaccion() {
        type= "number"
         {...register("amount", { required: true })}
       />
-      <TextField
-        sx={style.styleInput}
-        type="text"
-        placeholder="Categoria"
-        {...register("category", { required: true })}
-      />
+      <Select
+  sx={style.styleInput}
+  defaultValue=""
+  {...register("category", { required: true })}
+>
+  <MenuItem value="">Selecciona una categoría</MenuItem>
+  {categories.map((cat) => (
+    <MenuItem key={cat._id} value={cat._id}>
+      {cat.name}
+    </MenuItem>
+  ))}
+</Select>
 
       <button type="submit" className="defaulbutton my-4">
         Agregar

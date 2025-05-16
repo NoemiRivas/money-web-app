@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CategoryCard from "../components/categories/CategoryCard";
 import ButtonCategoryModal from "../components/buttons/ButtonCategoryModal";
+import { useCategories } from "../context/CategoriesContext";
 
 export default function CategoryPages() {
+const {categories, getCategories}= useCategories()
 
+
+  useEffect(() => {
+  getCategories();
+}, []);
   /**
    * ADD THE FUNCTIONALITY WHEN THE ADD NEW CATEGORY AND SHOWS ALL DATA OF THE CATEGORY
    * * 1. save category automatically when user create new transaction
@@ -32,7 +38,7 @@ export default function CategoryPages() {
         <button className="bg-neutral-900 text-white px-4 py-2 rounded-lg cursor-pointer hover:scale-105 transition-all duration-300">gastos</button>
       </div>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <CategoryCard userId ={user.id} />
+        <CategoryCard />
       </div>
     </main>
   );

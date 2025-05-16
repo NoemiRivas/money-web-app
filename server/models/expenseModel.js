@@ -9,10 +9,15 @@ const expenseSchema = new mongoose.Schema(
       required: true,
     },
     amount: { type: Number, required: true },
-    category: { type: String, required: true },
+
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     done: { type: Boolean, default: false },
     user: {
-      type:String,
+      type: String,
       ref: "User",
     },
     date: { type: Date, default: Date.now },
