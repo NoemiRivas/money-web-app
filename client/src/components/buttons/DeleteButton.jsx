@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { UserContext } from "../../context/UserContext";
 
 export default function DeleteButton({ categoryId }) {
-  const { deleteCategory } = useContext(UserContext);
+ 
 
   const handleDelete = async () => {
     try {

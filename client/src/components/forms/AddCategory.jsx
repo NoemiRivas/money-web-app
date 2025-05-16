@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/UserContext";
+
 export default function AddCategory() {
-  const { addCategory } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     name: "",
     type: "gasto",

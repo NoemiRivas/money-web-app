@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../context/UserContext";
+
 
 export default function UpdateForm({category}) {
-  const { modifyCategory } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     _id: '',  
     name:  '',

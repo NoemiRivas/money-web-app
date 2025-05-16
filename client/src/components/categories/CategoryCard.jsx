@@ -1,12 +1,12 @@
 import React, { useContext, useMemo } from "react";
 
-import { UserContext } from "../../context/UserContext";
+
 import { useEffect } from "react";
 import EditCategory from "../buttons/EditCategory";
 import DeleteButton from "../buttons/DeleteButton";
 
 export default function CategoryCard({ userId }) {
-  const { categories = [], getCategories, loading } = useContext(UserContext);
+
 
   useEffect(() => {
     getCategories(userId);

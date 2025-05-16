@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import CategoryCard from "../components/categories/CategoryCard";
 import ButtonCategoryModal from "../components/buttons/ButtonCategoryModal";
-import { UserContext } from "../context/UserContext";
 
 export default function CategoryPages() {
-  const {user}=useContext(UserContext)
+
   /**
    * ADD THE FUNCTIONALITY WHEN THE ADD NEW CATEGORY AND SHOWS ALL DATA OF THE CATEGORY
    * * 1. save category automatically when user create new transaction

@@ -1,25 +1,20 @@
 import "./App.css";
 
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import TransaccionsPage from "./pages/TransaccionsPage";
 import NavBar from "./components/NavBar";
 import CategoryPages from "./pages/CategoryPages";
 import SettingsPage from "./pages/SettingsPage";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddTransaccion from "./components/forms/AddTransaccion";
 import TransactionProvider from "./context/TransactionContext";
-
 import {
   SignIn,
   SignUp,
   SignedIn,
   SignedOut,
   RedirectToSignIn,
-  ClerkProvider,
 } from "@clerk/clerk-react";
 
 function App() {
@@ -71,7 +66,6 @@ function App() {
             }
           />
           <Route path="/perfil" element={<SettingsPage />} />
-
 
           <Route
             path="/login"
