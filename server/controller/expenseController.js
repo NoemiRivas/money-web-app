@@ -2,6 +2,7 @@ const Expense = require("../models/expenseModel");
 
 exports.addExpense = async (req, res) => {
   try {
+    const userId = req.auth.userId;
     const { description, amount, category, type } = req.body;
 
     const newExpense = new Expense({
@@ -9,7 +10,7 @@ exports.addExpense = async (req, res) => {
       amount: Number(amount),
       category,
       type,
-      userId: req.user.id,
+      user: userId,
     });
 
     const savedExpense = await newExpense.save();
@@ -25,9 +26,10 @@ exports.addExpense = async (req, res) => {
 
 exports.getAllExpenses = async (req, res) => {
   try {
+    const userId = req.auth.userId;
     const expense = await Expense.find({
-      userId: req.user.id,
-    }).populate("userId", "name email");
+      user: userId,
+    });
 
     if (!expense)
       return res.status(404).json({ message: "transaccion no encontrada" });
@@ -40,7 +42,7 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.getExpenseById = async (req, res) => {
   try {
-    const expense = await Expense.findById(req.params.id).populate("user");
+    const expense = await Expense.findById(req.params.id);
     if (!expense)
       return res.status(404).json({ message: "transaccion no encontrada" });
     res.json(expense);

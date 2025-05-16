@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useTransaction } from "../../context/TransactionContext";
-import { useAuth } from "../../context/UserContext";
+import { useUser } from "@clerk/clerk-react";
 
 
 export default function UserSummaryBadget() {
 const {transactions} = useTransaction()
-const {user}= useAuth()
+const {user}= useUser()
 
   const totals = transactions.reduce(
     (data, transaction) => {

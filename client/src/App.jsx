@@ -9,33 +9,90 @@ import CategoryPages from "./pages/CategoryPages";
 import SettingsPage from "./pages/SettingsPage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RequireAuth from "./components/privateRoutes/requireAuth";
 import HomePage from "./pages/HomePage";
 import AddTransaccion from "./components/forms/AddTransaccion";
-import { AuthProvider } from "./context/UserContext";
 import TransactionProvider from "./context/TransactionContext";
+
+import {
+  SignIn,
+  SignUp,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+  ClerkProvider,
+} from "@clerk/clerk-react";
 
 function App() {
   return (
-    <AuthProvider>
-      <TransactionProvider>
+    <TransactionProvider>
+     
         <BrowserRouter>
           <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/registrarse" element={<RegisterPage />} />
-            <Route element={<RequireAuth />}>
-              <Route path="/update/:id" element={<AddTransaccion />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/transacciones" element={<TransaccionsPage />} />
-              <Route path="/categorias" element={<CategoryPages />} />
-              <Route path="/configuracion" element={<SettingsPage />} />
-            </Route>
+            <Route
+              path="/login"
+              element={<SignIn routing="path" path="/login" />}
+            />
+            <Route
+              path="/registrarse"
+              element={<SignUp routing="path" path="/registrarse" />}
+            />
+
+            <Route
+              path="/update/:id"
+              element={
+                <SignedIn>
+                  <AddTransaccion />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <SignedIn>
+                  <DashboardPage />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/transacciones"
+              element={
+                <SignedIn>
+                  <TransaccionsPage />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/categorias"
+              element={
+                <SignedIn>
+                  <CategoryPages />
+                </SignedIn>
+              }
+            />
+            <Route
+              path="/configuracion"
+              element={
+                <SignedIn>
+                  <SettingsPage />
+                </SignedIn>
+              }
+            />
+
+            {/* Ruta para manejar cualquier otra sin sesión activa */}
+            <Route
+              path="*"
+              element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              }
+            />
           </Routes>
         </BrowserRouter>
-      </TransactionProvider>
-    </AuthProvider>
+   
+    </TransactionProvider>
   );
 }
 

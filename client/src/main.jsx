@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { ClerkProvider } from "@clerk/clerk-react";
 
-import App from './App.jsx'
+import App from "./App.jsx";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+createRoot(document.getElementById("root")).render(
+  <ClerkProvider
+    publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+    signUpFallbackRedirectUrl="/dashboard"
+    signInFallbackRedirectUrl="/dashboard"
+  >
     <App />
-  </StrictMode>,
-)
+  </ClerkProvider>
+);

@@ -8,10 +8,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/UserContext";
+
+import { useClerk, useUser } from "@clerk/clerk-react";
 
 export default function UserAvatar() {
-  const {signOut, user} = useAuth()
+  const { user } = useUser();
+  const { signOut } = useClerk();
   const navigate = useNavigate();
   //open and close the menu ---- MUI
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,13 +25,13 @@ export default function UserAvatar() {
     setAnchorEl(null);
   };
   //logout
-  const handleLogout = () => {
-    signOut()
+  const handleLogout = async () => {
+    await signOut();
     navigate("/login");
-  }
+  };
 
   //user avatar
-  const userAvatarName = user?.fullname?.charAt(0).toUpperCase() || "U";
+  const userAvatarName = user?.fullName?.charAt(0).toUpperCase() || "U";
 
   return (
     <>
@@ -54,9 +56,8 @@ export default function UserAvatar() {
         <Link to={"/perfil"}>
           <MenuItem onClick={handleClose}>Profile</MenuItem>
         </Link>
-        <Link to={"/login"}>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Link>
+
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>
   );

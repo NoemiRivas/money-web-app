@@ -4,11 +4,11 @@ import Sidebar from "./mui/Sidebar";
 import UserAvatar from "./mui/UserAvatar";
 //icons
 import SearchIcon from "@mui/icons-material/Search";
-import { useAuth } from "../context/UserContext";
+import { useUser } from "@clerk/clerk-react";
 
 
 export default function NavBar() {
- const {user}= useAuth()
+ const {user}= useUser()
 
 
   if (!user) {
