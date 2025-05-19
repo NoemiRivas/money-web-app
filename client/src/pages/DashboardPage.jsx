@@ -9,9 +9,12 @@ import ModalWrapper from "../components/mui/ModalWrapper";
 
 export default function DashboardPage() {
   const { categories } = useCategories();
+  /**
+   * aqui muestro las primeras 3 categorias
+   */
   const topCategories = categories.slice(0, 3);
   return (
-    <Container className="flex flex-col gap-4" >
+    <Container className="flex flex-col gap-4 fade-in" >
       <div className="flex items-center justify-between lg:flex-row max-lg:flex-col">
         <UserSummaryBadget />
         <ModalWrapper />

@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+
 import { useTransaction } from "../../context/TransactionContext";
 import { useUser } from "@clerk/clerk-react";
 
 
 export default function UserSummaryBadget() {
   const { transactions } = useTransaction();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
 
   const totals = transactions.reduce(
     (data, transaction) => {
@@ -18,7 +18,9 @@ export default function UserSummaryBadget() {
     },
     { ingreso: 0, gasto: 0 }
   );
-
+ if (!isLoaded || !user) {
+    return null;
+  }
   const balance = totals.ingreso - totals.gasto;
 
   const financialData = [
@@ -35,7 +37,7 @@ export default function UserSummaryBadget() {
     <div className="flex flex-col gap-2 items-start pt-4">
       <div className="flex justify-between items-center gap-2"> 
         <div className="flex flex-col gap-2 font-bold text-4xl text-sky-800 ">
-          <p>Hola, {user.username}</p>
+          <p>Hola, {user.firstName|| user.fullName  }</p>
 
           <p className=" text-lg font-light text-neutral-400">
             Aquí tienes un resumen de tus finanzas
@@ -54,7 +56,7 @@ export default function UserSummaryBadget() {
               <div
                 className={`w-[300px] p-4 rounded-xl md:w-[200px] sm:w-[180px] ${item.color}`}
               >
-                <p className="text-3xl font-medium">{item.amount}</p>
+                <p className="text-3xl font-medium">${item.amount}</p>
               </div>
             </div>
           </div>

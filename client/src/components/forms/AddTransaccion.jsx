@@ -60,15 +60,19 @@ export default function AddTransaccion() {
   const type = watch("type");
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-2">
-       <Typography className=" text-white font-bold">
+      <Typography className=" text-white font-bold">
         Selecciona el tipo de categoria
       </Typography>
       <Select
+      variant="outlined"
+          fullWidth
+        select
+        label="Selecciona el tipo "
         sx={style.styleInput}
         defaultValue="selecciona el tipo"
         {...register("category", { required: "Crea primero una categoria" })}
       >
-        <MenuItem value="" >Selecciona una categoría</MenuItem>
+        <MenuItem value="">Selecciona una categoría</MenuItem>
         {categories.map((cat) => (
           <MenuItem key={cat._id} value={cat._id}>
             {cat.name}
@@ -78,7 +82,7 @@ export default function AddTransaccion() {
       {errors.category && (
         <p className="text-red-500 font-bold  ">{errors.category.message}</p>
       )}
-     
+
       <Typography className=" text-white font-bold">
         Nombre de la transaccion
       </Typography>
@@ -98,7 +102,9 @@ export default function AddTransaccion() {
         type="number"
         {...register("amount", { required: "Campo requerido" })}
       />
-      {errors.amount && <p className="text-red-500 font-bold ">{errors.amount.message}</p>}
+      {errors.amount && (
+        <p className="text-red-500 font-bold ">{errors.amount.message}</p>
+      )}
       <Typography className=" text-white font-bold">
         Selecciona el tipo de transaccion
       </Typography>
@@ -112,7 +118,10 @@ export default function AddTransaccion() {
         <MenuItem value="gasto">Gasto</MenuItem>
         <MenuItem value="ingreso">Ingreso</MenuItem>
       </Select>
-      {errors.type && <p className="text-red-500 font-bold ">{errors.type.message}</p>}
+      {errors.type && (
+        <p className="text-red-500 font-bold ">{errors.type.message}</p>
+      )}
+
       <button type="submit" className="defaulbutton my-4">
         Agregar
       </button>

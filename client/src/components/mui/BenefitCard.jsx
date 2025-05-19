@@ -22,7 +22,7 @@ function BenefitCard() {
     }
     ]
   return (
-      <div className=" max-w-3xl grid  md:grid-cols-3 gap-4">
+      <div className="py-20 m-auto max-w-3xl grid  md:grid-cols-3 gap-4">
         {
             BenefitCard.map((item, index) => (
               <div key={index} className="bg-cyan-600 rounded-xl shadow-md shadow-sky-700 p-6 text-left hover:shadow-lg transition">

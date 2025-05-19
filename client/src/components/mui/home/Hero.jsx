@@ -21,7 +21,7 @@ function Hero() {
             <Link to={"/registrarse"}>
               <button className="w-40 cursor-pointer p-3 bg-sky-400 rounded-4xl text-xl text-center capitalize font-bold">
                 inicia
-              </button>{" "}
+              </button>
             </Link>
           </div>
         </div>
@@ -38,9 +38,9 @@ function Hero() {
                 Almacena tu información de forma segura
               </p>
               <p>
-                Mantén tu información segura con las funciones de seguridad
-                digital más avanzadas. Protegemos tu información y te damos
-                control total sobre quién la ve y cuándo.
+               Autenticación moderna y segura con Clerk. Protege tus datos con cifrado avanzado y gestiona tu cuenta fácilmente. Tu información, siempre segura y accesible.
+
+
               </p>
             </div>
             <div className="w-2/9 flex flex-col items-center gap-4 text-center ">

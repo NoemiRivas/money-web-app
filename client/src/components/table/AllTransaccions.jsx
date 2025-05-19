@@ -16,15 +16,14 @@ export default function AllTransaccions() {
   }, []);
 
   const columns = [
-    { field: "date", headerName: "Fecha", width: 150 },
     { field: "description", headerName: "Descripción", width: 300 },
-    { field: "type", headerName: "Tipo", width: 150 },
-    { field: "category", headerName: "Categoría", width: 150 },
-    { field: "amount", headerName: "Cantidad", width: 150 },
+    { field: "type", headerName: "Tipo", width: 300 },
+
+    { field: "amount", headerName: "Cantidad", width: 300 },
     {
       field: "col5",
       headerName: "Eliminar",
-      width: 124,
+      width: 130,
       renderCell: (params) => (
         <IconButton
           variant="contained"
@@ -52,10 +51,13 @@ export default function AllTransaccions() {
   return (
     <Container className="fade-in ">
       <div className="mb-6 flex justify-between items-center  max-sm:flex-col max-sm:items-start max-sm:gap-5">
-        <div className=" py-8 ">
+        <div className=" py-20 ">
           <h2 className="text-4xl font-bold text-sky-800">
             Todas las trasacciones
           </h2>
+          <p className="text-gray-500 py-2">
+            Aquí puedes Modificar o eliminar las transacciones
+          </p>
         </div>
         <ModalWrapper />
       </div>

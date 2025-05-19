@@ -20,7 +20,7 @@ exports.getCategories = async (req, res) => {
   try {
     const userId = req.auth.userId;
     const categories = await Category.find({ userId });
-    console.log("UserId recibido:", userId);
+
     if (!categories) {
       console.log("Categoría no encontrada");
     } else {

@@ -3,9 +3,10 @@ const Expense = require("../models/expenseModel");
 exports.addExpense = async (req, res) => {
   try {
     const userId = req.auth.userId;
-    const { description, amount, category, type } = req.body;
+    const { description, amount, category, type, date } = req.body;
 
     const newExpense = new Expense({
+      date,
       description,
       amount: Number(amount),
       category,
@@ -34,7 +35,7 @@ exports.getAllExpenses = async (req, res) => {
     if (!expense)
       return res.status(404).json({ message: "transaccion no encontrada" });
     res.json(expense);
-    console.log("Transacciones obtenidas del backend:", expense);
+   
   } catch (error) {
     console.log("error al obtener todas las entradas", error);
   }

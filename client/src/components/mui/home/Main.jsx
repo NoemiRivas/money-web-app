@@ -1,11 +1,11 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 function Main() {
   return (
     <section className="  bg-stone-100 ">
       <div className="m-auto max-w-[1200px] flex justify-around items-center py-8">
-        {" "}
+        
         <div className="flex flex-col items-center gap-4 text-sky-900 text-center w-2/5">
           <h2 className="font-bold text-3xl leading-10">
             Sin control, no hay progreso.
@@ -27,6 +27,7 @@ function Main() {
         <div>
           <img src="./img-hero.png" alt="" />
         </div>
+        
       </div>
     </section>
   );

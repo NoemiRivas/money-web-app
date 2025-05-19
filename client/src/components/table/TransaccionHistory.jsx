@@ -4,33 +4,33 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTransaction } from "../../context/TransactionContext";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function TransaccionHistory() {
   //context
   const { transactions, getTransactions } = useTransaction();
-  useEffect(()=>{
-    getTransactions()
-  },[])
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   //---------------------columns--------------------------------
 
   const columns = [
+
     {
       field: "description",
       headerName: "Descripción",
-      width: 287,
+      width: 500,
       backgroundColor: "#0092b8",
     },
-    { field: "type", headerName: "Tipo", width: 287 },
-    { field: "category", headerName: "Categoría", width: 287 },
+    { field: "type", headerName: "Tipo", width: 400},
+    
     {
       field: "amount",
       headerName: "Cantidad",
-      width: 287,
+      width: 250,
     },
   ];
- ;
-
   const stayle = {
     button: {
       borderRadius: "8px",
@@ -43,12 +43,12 @@ export default function TransaccionHistory() {
 
   return (
     <>
-      <div className=" py-8 ">
+      <div className=" py-4 ">
         <h2 className="text-4xl font-bold text-sky-800">
-          Transacciones agregadas ultimamente...{" "}
+          Transacciones agregadas ultimamente...
         </h2>
       </div>
-      <div className="py-2">
+      <div >
         <Link to={"/transacciones"}>
           <Button sx={stayle.button}>ver todas</Button>
         </Link>
@@ -66,8 +66,8 @@ export default function TransaccionHistory() {
         >
           <DataGrid
             disableColumnResize
-              getRowId={(row) => row._id}
-              rows={transactions}
+            getRowId={(row) => row._id}
+            rows={transactions}
             columns={columns}
             pageSize={5}
             pageSizeOptions={[4]}

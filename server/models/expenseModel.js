@@ -13,9 +13,9 @@ const expenseSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      
     },
     done: { type: Boolean, default: false },
+    /** implement user reference of clerk */
     user: {
       type: String,
       ref: "User",

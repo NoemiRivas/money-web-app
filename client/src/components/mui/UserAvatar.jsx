@@ -31,7 +31,7 @@ export default function UserAvatar() {
   };
 
   //user avatar
-  const userAvatarName = user?.fullName?.charAt(0).toUpperCase() || "U";
+  const userAvatarName = user.fullName.charAt(0).toUpperCase();
 
   return (
     <>
