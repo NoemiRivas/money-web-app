@@ -13,7 +13,7 @@ const expenseSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: true,
+      
     },
     done: { type: Boolean, default: false },
     user: {

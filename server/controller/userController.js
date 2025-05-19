@@ -3,12 +3,13 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-dotenv.config()
+dotenv.config();
 const KEY = process.env.SECRET_KEY;
-const createdAccesToken = require("../utils/createdAccessToken") 
+const createdAccesToken = require("../utils/createdAccessToken");
+
 
 exports.register = async (req, res) => {
-  const { fullname, email, password } = req.body;
+  const { fullname, email, password} = req.body;
 
   try {
     const user = await User.findOne({ email });
@@ -46,7 +47,7 @@ exports.login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     console.log(user);
-    
+
     if (!user) {
       return res.status(400).json("Usuario no encontrado");
     }
@@ -56,20 +57,16 @@ exports.login = async (req, res) => {
     }
 
     try {
-       const token = await createdAccesToken({ id: user._id });
-       console.log(token);
-       res.cookie("token", token);
+      const token = await createdAccesToken({ id: user._id });
+      console.log(token);
+      res.cookie("token", token);
     } catch (error) {
       console.log(error);
-      
     }
-   
-   
-    
-    
-    res.status(200).json({ id: user._id, fullname: user.fullname, email: user.email });
-  
-    
+
+    res
+      .status(200)
+      .json({ id: user._id, fullname: user.fullname, email: user.email });
   } catch (error) {
     console.log(error);
   }
@@ -120,4 +117,3 @@ exports.verifyRequest = async (req, res) => {
     });
   });
 };
-
