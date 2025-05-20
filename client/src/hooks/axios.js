@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAuth } from "@clerk/clerk-react";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
