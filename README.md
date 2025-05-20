@@ -8,13 +8,6 @@ MoneyTrack es una aplicación web fullstack que te permite registrar, visualizar
 
 🔗 money-up-noemirivas-projects.vercel.app
 
----
-
-## 📸 Capturas de pantalla
-
-
-![alt text](<Captura de pantalla 2025-05-20 175911.png>) ![alt text](<Captura de pantalla 2025-05-20 175944-1.png>)
----
 
 ## 🔐 Autenticación con Clerk
 
