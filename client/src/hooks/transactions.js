@@ -1,7 +1,7 @@
-import axios from "./axios"
+import instance from "./axios"
 
-export const getTransactionsRequest = ()=> axios.get("/expense/all-expenses")
-export const getExpenseRequest = (id) => axios.get(`/expense/getExpense/${id}`);
-export const createExpenseRequest = (expense) => axios.post("/expense/add-expense", expense);
-export const deleteExpenseRequest = (id) => axios.delete(`/expense/remove/${id}`);
-export const updateExpenseRequest = (id,expense) => axios.put(`/expense/update/${id}`, expense);
+export const getTransactionsRequest = ()=> instance.get("/expense/all-expenses")
+export const getExpenseRequest = (id) => instance.get(`/expense/getExpense/${id}`);
+export const createExpenseRequest = (expense) => instance.post("/expense/add-expense", expense);
+export const deleteExpenseRequest = (id) => instance.delete(`/expense/remove/${id}`);
+export const updateExpenseRequest = (id,expense) => instance.put(`/expense/update/${id}`, expense);

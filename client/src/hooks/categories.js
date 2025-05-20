@@ -1,10 +1,10 @@
-import axios from "./axios";
+import instance from "./axios";
 
 export const getCategoriesRequest = () =>
-  axios.get("/categories/get-categories");
+  instance.get("/categories/get-categories");
 export const createCategoriesRequest = (categories) =>
-  axios.post("/categories/add-categories", categories);
+  instance.post("/categories/add-categories", categories);
 export const deleteCategoriesRequest = (id) =>
-  axios.delete(`/categories/delete/${id}`);
+  instance.delete(`/categories/delete/${id}`);
 export const updateCategoriesRequest = (id, categories) =>
-  axios.put(`/categories/update-category/${id}`, categories);
+  instance.put(`/categories/update-category/${id}`, categories);
