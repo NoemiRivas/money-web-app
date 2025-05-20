@@ -5,4 +5,16 @@ const instance = axios.create({
   withCredentials: true,
 });
 console.log("Base URL cargada:", import.meta.env.VITE_API_URL);
+
+instance.interceptors.request.use(
+  async (config) => {
+    const { getToken } = getAuth();
+    const token = await getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 export default instance;

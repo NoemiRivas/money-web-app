@@ -1,10 +1,21 @@
 import instance from "./axios";
 
-export const getCategoriesRequest = () =>
-  instance.get("/categories/get-categories");
-export const createCategoriesRequest = (categories) =>
-  instance.post("/categories/add-categories", categories);
-export const deleteCategoriesRequest = (id) =>
-  instance.delete(`/categories/delete/${id}`);
-export const updateCategoriesRequest = (id, categories) =>
-  instance.put(`/categories/update-category/${id}`, categories);
+export const getCategoriesRequest = (token) =>
+  instance.get("/categories/get-categories", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const createCategoriesRequest = (categories, token) =>
+  instance.post("/categories/add-categories", categories, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const deleteCategoriesRequest = (id, token) =>
+  instance.delete(`/categories/delete/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const updateCategoriesRequest = (id, categories, token) =>
+  instance.put(`/categories/update-category/${id}`, categories, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
