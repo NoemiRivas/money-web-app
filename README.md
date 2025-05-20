@@ -6,7 +6,7 @@ MoneyTrack es una aplicación web fullstack que te permite registrar, visualizar
 
 ## 🌐 Demo
 
-🔗 [https://money-up-omega.vercel.app](https://money-up-omega.vercel.app)
+🔗 money-up-noemirivas-projects.vercel.app
 
 ---
 
