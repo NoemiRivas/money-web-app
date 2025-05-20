@@ -1,105 +1,100 @@
-# MoneyTrack
+# 💰 MoneyTrack – App de Finanzas Personales
 
-MoneyTrack es una aplicación para gestionar tus finanzas personales. Permite registrar ingresos, gastos, y visualizar un resumen financiero de manera sencilla y atractiva.
+MoneyTrack es una aplicación web fullstack que te permite registrar, visualizar y gestionar tus ingresos y gastos personales de forma clara, segura y eficiente. Utiliza Clerk para autenticación moderna y MongoDB como base de datos.
 
-## Características
+---
 
-- **Gestión de ingresos y gastos**: Registra tus transacciones fácilmente.
-- **Resumen financiero**: Visualiza tus ingresos, gastos y balance actual.
-- **seguridad robusta**: autenticacion con jwt, contraseñas encriptadas, rutas protegidas
-- **Experiencia de usuario**: diseño responsivo
-- **Interfaz moderna**: Diseñada con React, Tailwind y Material-UI para una experiencia de usuario fluida.
-- **Backend robusto**: Construido con Node.js y MongoDB.
+## 🌐 Demo
 
-## Capturas de Pantalla
+🔗 [https://money-up-omega.vercel.app](https://money-up-omega.vercel.app)
 
-### Dashboard
-![Dashboard](client/public/screenshots/dashboard.png)
+---
 
-### Historial de Transacciones
-![Historial](client/public/screenshots/transactions.png)
+## 📸 Capturas de pantalla
 
-### Categorias del usuario
-![Resumen](client/public/screenshots/categories.png)
 
-## Tecnologías Utilizadas
+![alt text](<Captura de pantalla 2025-05-20 175911.png>) ![alt text](<Captura de pantalla 2025-05-20 175944-1.png>)
+---
 
-- **Frontend**: React, Material-UI, react router
-- **Backend**: Node.js, Express.js, axios
-- **Base de Datos**: MongoDB, mongoose
-- **Autenticación**: JSON Web Tokens (JWT), bcrypt, dotenv
+## 🔐 Autenticación con Clerk
 
-## Proceso de Construcción
-- **Investigacion Inicial**: Análisis de requerimientos, Definición de stack tecnológico
+Este proyecto utiliza **[Clerk](https://clerk.com/)** como proveedor de autenticación de usuarios. Aquí te explicamos cómo se integró:
 
-- **Implementación backend**:
-Configuración del servidor Express,
-Modelado de datos con Mongoose,
-Implementación de autenticación JWT,
-Creación de API RESTful
+### Frontend
+- Uso de `@clerk/clerk-react` para proteger rutas.
+- Login, registro, y manejo de sesión directamente con componentes de Clerk.
+- ClerkProvider envuelve toda la app para facilitar acceso al usuario actual.
 
-- **Desarrollo frontend**:
-Configuración de React, Implementación de rutas protegidas, Conexión con backend mediante Axios
+### Backend
+- Uso de `@clerk/clerk-sdk-node`.
+- Se protege el backend con `ClerkExpressWithAuth()` como middleware global.
+- Los endpoints sensibles requieren token válido emitido por Clerk.
 
-## Instalación
+> Clerk permite autenticación con email/password o magic links, lo que lo hace muy simple de usar sin manejar contraseñas directamente.
 
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/moneytrack.git
-   cd moneytrack
+---
 
-   
-2. Instala las dependencias del servidor:
-    ```bash 
+## 🧩 Tecnologías utilizadas
+
+### Frontend
+- React + Vite
+- Tailwind CSS
+- Axios
+- Clerk
+
+### Backend
+- Node.js + Express
+- MongoDB + Mongoose
+- Clerk SDK
+- CORS, dotenv
+
+### Deploy
+- **Frontend:** Vercel
+- **Backend:** Render
+
+---
+
+🚀 Cómo ejecutar el proyecto localmente
+1. Clona el repositorio
+    ````bash 
+    git clone https://github.com/NoemiRivas/moneyUp.git
+    cd moneytrack
+
+2. Configura las variables de entorno
+
+client/.env
+
+    ```bash
+        env
+        VITE_API_URL=http://localhost:5000/api
+        VITE_CLERK_PUBLISHABLE_KEY=tu_clave_publica_de_clerk
+server/.env
+
+    ```bash
+    env
+    PORT=5000
+    MONGO_URL=mongodb+srv://<usuario>:<contraseña>@cluster.mongodb.net
+    CLERK_SECRET_KEY=tu_clave_secreta_de_clerk
+    API_VERCEL=http://localhost:5173
+
+🔐 Asegúrate de mantener estas variables fuera del control de versiones (usa .gitignore)
+
+3. Instala dependencias y ejecuta el proyecto
+
+# Inicia el backend
+    ```bash
     cd server
     npm install
-
-3. Instala las dependencias del cliente:
-     ```bash 
-     cd ../client
+    npm run dev
+    cd client
     npm install
-
-4. Configura las variables de entorno:
-Crea un archivo .env en la carpeta server con las siguientes variables:
-    ```bash 
-    tuMONGO_URI=<_uri_de_mongodb>
-    JWT_SECRET=<tu_secreto_jwt>
-
-5. Inicia el servidor y el cliente:
-   ```bash 
-   cd server
-    npm start
-    cd ../client
-    npm start
-
-## Conclucion y proximas mejoras
-
-Este proyecto es una aplicación web desarrollada con el objetivo de interiorizar y fortalecer habilidades adquiridas en el desarrollo frontend y backend, con un enfoque en seguridad y organización.
-
- He implementado principios SOLID, encriptación de datos con bcrypt, autenticación mediante JWT en localStorage, y conexión con una API utilizando Axios. Además, se siguió el método ágil de desarrollo de manera autónoma.
-
-- Próximos Desafíos y Mejoras 🚀
-
-    - Filtrar transacciones por categorías 🔎
-
-         1. Implementar un filtro en la UI que permita a los usuarios buscar transacciones por categorías específicas.
-
-        2. Optimizar las consultas en el backend para obtener solo las transacciones que pertenecen a una categoría seleccionada.
-
-
-    - Agregar gráficos 📊
-
-        1. Implementar visualizaciones con librerías como Chart.js o D3.js para representar los datos de las transacciones.
-
-        2. Crear gráficos de barras y circulares que reflejen el gasto por categoría y por período de tiempo.
+    npm run dev
+    # En una nueva terminal, inicia el frontend
 
 
 
-    - Diseño más llamativo y elegante 🎨
 
-        1. Refinar la paleta de colores y tipografías para mejorar la estética y la legibilidad de la interfaz.
+📝 Licencia
+Este proyecto está bajo la licencia MIT.
 
-
-        2. Optimizar el diseño responsivo para que la aplicación funcione perfectamente en dispositivos móviles y de escritorio.
-
-        3. Implementar un sistema de temas (modo claro/oscuro) para mayor personalización.
+Desarrollado con 💻 por Noemí Rivas
