@@ -6,6 +6,7 @@ import {
   getTransactionsRequest,
   updateExpenseRequest,
 } from "../hooks/transactions";
+import { useAuth } from "@clerk/clerk-react";
 
 const TransactionsContext = createContext();
 export const useTransaction = () => {
@@ -18,10 +19,12 @@ export const useTransaction = () => {
 
 function TransactionProvider({ children }) {
   const [transactions, setTransacctions] = useState([]);
+  const { getToken } = useAuth();
 
   const getTransactions = async () => {
     try {
-      const res = await getTransactionsRequest();
+      const token = await getToken();
+      const res = await getTransactionsRequest(token);
 
       setTransacctions(res.data);
     } catch (error) {
@@ -31,7 +34,8 @@ function TransactionProvider({ children }) {
 
   const createTransactions = async (data) => {
     try {
-      const res = await createExpenseRequest(data);
+      const token = await getToken();
+      const res = await createExpenseRequest(data, token);
       setTransacctions([...transactions, res.data]);
       await getTransactions();
     } catch (error) {
@@ -41,7 +45,8 @@ function TransactionProvider({ children }) {
 
   const deleteTransactions = async (id) => {
     try {
-      const res = await deleteExpenseRequest(id);
+      const token = await getToken();
+      const res = await deleteExpenseRequest(id, token);
       if (res.status === 200) {
         setTransacctions(transactions.filter((expense) => expense._id !== id));
       }
@@ -51,7 +56,8 @@ function TransactionProvider({ children }) {
   };
   const oneTransaction = async () => {
     try {
-      const res = await getExpenseRequest();
+      const token = await getToken();
+      const res = await getExpenseRequest(token);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -59,7 +65,8 @@ function TransactionProvider({ children }) {
   };
   const updateTransaction = async (id, expense) => {
     try {
-      await updateExpenseRequest(id, expense);
+      const token = await getToken();
+      await updateExpenseRequest(id, expense, token);
     } catch (error) {
       console.log(error);
     }

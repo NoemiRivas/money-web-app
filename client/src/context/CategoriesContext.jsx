@@ -5,6 +5,7 @@ import {
   deleteCategoriesRequest,
   updateCategoriesRequest,
 } from "../hooks/categories";
+import { useAuth } from "@clerk/clerk-react";
 const CategoriesContext = createContext();
 export const useCategories = () => {
   const context = useContext(CategoriesContext);
@@ -16,10 +17,12 @@ export const useCategories = () => {
 
 function CategoriesProvider({ children }) {
   const [categories, setCategories] = useState([]);
+  const { getToken } = useAuth();
 
   const getCategories = async () => {
     try {
-      const res = await getCategoriesRequest();
+      const token = await getToken();
+      const res = await getCategoriesRequest(token);
 
       setCategories(res.data);
       console.log("Categorías recibidas:", res);
@@ -30,7 +33,8 @@ function CategoriesProvider({ children }) {
 
   const createCategories = async (data) => {
     try {
-      const res = await createCategoriesRequest(data);
+      const token = await getToken();
+      const res = await createCategoriesRequest(data, token);
       setCategories([...categories, res.data]);
       await getCategories();
     } catch (error) {
@@ -40,7 +44,8 @@ function CategoriesProvider({ children }) {
 
   const deleteCategories = async (id) => {
     try {
-      const res = await deleteCategoriesRequest(id);
+      const token = await getToken();
+      const res = await deleteCategoriesRequest(id, token);
       if (res.status === 200) {
         setCategories(categories.filter((category) => category._id !== id));
       }
@@ -51,7 +56,8 @@ function CategoriesProvider({ children }) {
 
   const updateCategories = async (id, category) => {
     try {
-      await updateCategoriesRequest(id, category);
+      const token = await getToken();
+      await updateCategoriesRequest(id, category, token);
     } catch (error) {
       console.log(error);
     }
