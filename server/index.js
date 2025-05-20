@@ -21,7 +21,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: "https://money-22l9eu8tu-noemirivas-projects.vercel.app",
+    origin: "https://money-up-noemirivas-projects.vercel.app/p",
     credentials: true,
   })
 );
