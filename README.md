@@ -1,4 +1,4 @@
-# 💰 MoneyTrack – App de Finanzas Personales
+# 💰 MoneyUp – App de Finanzas Personales
 
 MoneyTrack es una aplicación web fullstack que te permite registrar, visualizar y gestionar tus ingresos y gastos personales de forma clara, segura y eficiente. Utiliza Clerk para autenticación moderna y MongoDB como base de datos.
 
